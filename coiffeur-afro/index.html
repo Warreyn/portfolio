@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Nattéa — Coiffure afro à Lyon, sur rendez-vous (démo portfolio)</title>
+<meta name="description" content="Knotless, locks, tissages : réserve ton créneau en 2 minutes, l'acompte bloque ta place. Studio Nattéa, Lyon 7e. Salon fictif créé pour un portfolio.">
+<!-- Page fictive : hors des moteurs de recherche. À RETIRER pour un vrai client. -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#120F1A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23120F1A'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23FF4FA3'/%3E%3C/svg%3E">
+
+<!-- Polices Google Fonts (licence SIL OFL 1.1). Chargement non bloquant : la page s'affiche d'abord avec la police de repli. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Sans:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Sans:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Sans:wght@400;500&amp;display=swap"></noscript>
+
+<style>
+  /* ---------- Palette « Nuit Néon » (contrastes vérifiés, voir README) ---------- */
+  :root {
+    --nuit: #120F1A;      /* fond */
+    --carte: #1D1828;     /* cartes, barre du bas */
+    --carte-2: #2A2240;   /* bords, haut des dégradés */
+    --blanc: #F6F2FB;     /* texte principal : 17,1:1 sur le fond */
+    --gris: #B8B0C6;      /* texte secondaire : 8,3:1 sur carte */
+    --gris-2: #8D85A0;    /* petits textes du pied : 5,4:1 sur le fond */
+    --rose: #FF4FA3;      /* accent : texte nuit dessus 6,2:1 */
+    --lavande: #B9A7FF;   /* petits libellés : 9,1:1 sur le fond */
+    --titres: Syne, "Arial Black", Arial, sans-serif;
+    --texte: "DM Sans", "Segoe UI", Arial, sans-serif;
+    --marge: 24px;
+    --rayon: 12px;
+    --barre: 64px;        /* hauteur de la barre « Réserver » fixe */
+    --largeur: 1100px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--nuit);
+    /* halo rose en haut à gauche, comme sur la maquette */
+    background-image: radial-gradient(ellipse 70vw 520px at 12% 0%, rgba(255, 79, 163, .26), rgba(255, 79, 163, 0) 70%);
+    background-repeat: no-repeat;
+    color: var(--blanc);
+    font-family: var(--texte);
+    font-size: 16px;
+    line-height: 1.55;
+    padding-bottom: calc(var(--barre) + env(safe-area-inset-bottom));
+  }
+
+  h1, h2, h3 { font-family: var(--titres); margin: 0; line-height: 1.1; }
+  p { margin: 0 0 1em; }
+  a { color: var(--lavande); }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--lavande);
+    outline-offset: 3px;
+  }
+
+  .contenu { width: 100%; max-width: var(--largeur); margin: 0 auto; padding: 0 var(--marge); }
+
+  /* Lien d'évitement (clavier) */
+  .evitement {
+    position: absolute; left: var(--marge); top: -60px;
+    background: var(--rose); color: var(--nuit); padding: 10px 14px; border-radius: 8px;
+    font-weight: 500; text-decoration: none; z-index: 20;
+  }
+  .evitement:focus { top: 12px; }
+
+  /* ---------- Boutons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; text-align: center;
+    min-height: 48px; padding: 10px 22px; border-radius: 10px; border: 0; line-height: 1.2;
+    font-family: var(--texte); font-size: 1rem; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-rose {
+    background: var(--rose); color: var(--nuit);
+    font-family: var(--titres); font-weight: 800;
+    box-shadow: 0 0 22px rgba(255, 79, 163, .45);
+  }
+  .btn-rose:hover { box-shadow: 0 0 34px rgba(255, 79, 163, .75); }
+  .btn-contour { border: 1.5px solid var(--lavande); color: var(--blanc); background: transparent; }
+  .btn-contour:hover { background: rgba(185, 167, 255, .12); }
+
+  /* ---------- En-tête ---------- */
+  .entete { padding: 16px 0; }
+  .entete .contenu { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; }
+  .logo {
+    font-family: var(--titres); font-weight: 800; font-size: 1.125rem; letter-spacing: .1em;
+    color: var(--blanc); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .logo::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--rose); }
+  .nav ul { list-style: none; margin: 0 -6px; padding: 0; display: flex; gap: 0; align-items: center; }
+  .nav a:not(.btn) {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; min-width: 44px; padding: 0 6px; /* zone cliquable ≥ 44 × 44 px */
+    color: var(--lavande); text-decoration: none; font-size: .8125rem; font-weight: 500;
+  }
+  .nav a:not(.btn):hover { color: var(--blanc); text-decoration: underline; }
+  .nav li:last-child { display: none; } /* le bouton « Réserver » du haut n'apparaît que sur ordinateur */
+
+  /* ---------- Sections ---------- */
+  section { padding: 40px 0; scroll-margin-top: 16px; }
+  .surtitre {
+    font-size: .8125rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--lavande); margin: 0 0 12px;
+  }
+  .titre { font-size: 1.0625rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 18px; }
+  .titre-section { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .titre-section .titre { margin-bottom: 0; }
+  .glisser { font-size: .8125rem; color: var(--lavande); }
+
+  /* ---------- Accroche ---------- */
+  .accroche { padding-top: 32px; }
+  /* 3 lignes comme la maquette : la ligne la plus large (« TON MOMENT. ») fait 12,25 fois la taille de police en Syne 800,
+     donc la taille suit la largeur disponible (écran moins les 2 marges) : ≈ 24,5 px à 360 px, ≈ 27 px à 390 px. */
+  .accroche h1 { font-size: clamp(20px, calc((100vw - 2 * var(--marge)) * .079), 44px); font-weight: 800; text-transform: uppercase; }
+  .accroche h1 .rose { color: var(--rose); }
+  .accroche .chapo { color: var(--gris); font-size: 1.0625rem; max-width: 36ch; margin: 18px 0 24px; }
+  .accroche .boutons { display: flex; gap: 12px; flex-wrap: wrap; }
+  .accroche .boutons .btn-rose { flex: 1 1 180px; }
+  .accroche .boutons .btn-contour { flex: 1 1 120px; }
+  .reel.accroche-visuel { display: none; } /* visible seulement sur ordinateur */
+
+  /* ---------- Galerie « reels » (espaces réservés pour les photos) ---------- */
+  .reels {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0 calc(-1 * var(--marge)); padding: 4px var(--marge) 12px; scroll-padding-inline: var(--marge);
+    scrollbar-width: thin; scrollbar-color: var(--carte-2) transparent;
+  }
+  .reel {
+    position: relative; flex: 0 0 132px; aspect-ratio: 3 / 4; margin: 0;
+    border-radius: var(--rayon); border: 1px solid var(--carte-2);
+    background: linear-gradient(180deg, var(--carte-2), var(--carte));
+    scroll-snap-align: start; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 10px;
+  }
+  /* forme douce pour suggérer une photo, sans image de tiers */
+  .reel::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 35%, rgba(255, 79, 163, .35), transparent 45%),
+                radial-gradient(circle at 25% 80%, rgba(185, 167, 255, .25), transparent 50%);
+  }
+  .reel .photo-ici {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: var(--gris); font-size: .8125rem; text-align: center; padding: 10px 10px 40px;
+  }
+  .reel .lecture { position: absolute; top: 10px; right: 10px; width: 16px; height: 16px; opacity: .8; }
+  .reel figcaption { position: relative; font-size: .8125rem; font-weight: 500; }
+  .reel figcaption::before { content: ""; display: block; width: 26px; height: 3px; border-radius: 2px; background: var(--rose); margin-bottom: 8px; }
+  .reel.lavande figcaption::before { background: var(--lavande); }
+
+  /* ---------- Prestations ---------- */
+  .prestations { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--carte-2); }
+  .prestations li {
+    display: grid; grid-template-columns: 1fr auto; column-gap: 16px; row-gap: 2px;
+    padding: 16px 0; border-bottom: 1px solid var(--carte-2); align-items: center;
+  }
+  .prestations h3 { grid-column: 1; font-family: var(--texte); font-weight: 500; font-size: 1rem; }
+  .prestations p { grid-column: 1; margin: 0; font-size: .875rem; color: var(--gris); }
+  .prestations .prix { grid-column: 2; grid-row: 1 / 3; font-size: 1.25rem; font-weight: 500; color: var(--rose); white-space: nowrap; }
+  .note { font-size: .875rem; color: var(--gris); margin-top: 14px; }
+  .note.avant { margin: 0 0 18px; }
+  .intro { color: var(--gris); }
+
+  /* ---------- Acompte ---------- */
+  .acompte {
+    background: var(--carte); border: 1px solid var(--carte-2); border-left: 4px solid var(--rose);
+    border-radius: var(--rayon); padding: 22px;
+  }
+  .acompte h2 { font-size: 1.0625rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+  .acompte .montant { font-family: var(--titres); font-size: 2rem; font-weight: 800; color: var(--rose); line-height: 1; margin-bottom: 14px; }
+  .acompte ol { margin: 0 0 14px; padding-left: 22px; color: var(--gris); }
+  .acompte li { margin-bottom: 6px; }
+  .acompte .regle { background: var(--nuit); border-radius: 8px; padding: 12px 14px; font-size: .9375rem; }
+  .acompte .regle strong { color: var(--blanc); }
+  .acompte .regle p:last-child { margin: 0; }
+
+  /* ---------- Le studio (portrait réservé) ---------- */
+  .studio { display: grid; gap: 22px; }
+  .portrait {
+    position: relative; aspect-ratio: 4 / 5; max-width: 300px; border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--carte-2);
+    background: linear-gradient(160deg, var(--carte-2), var(--carte) 60%, var(--nuit));
+    display: flex; align-items: center; justify-content: center; color: var(--gris); font-size: .875rem;
+  }
+  .portrait::before {
+    content: ""; position: absolute; width: 60%; aspect-ratio: 1; border-radius: 50%; top: 14%; left: 20%;
+    background: radial-gradient(circle at 40% 35%, rgba(255, 79, 163, .55), rgba(185, 167, 255, .25) 60%, transparent 75%);
+  }
+  .portrait span { position: relative; background: rgba(18, 15, 26, .6); padding: 6px 10px; border-radius: 6px; }
+  .studio p { color: var(--gris); max-width: 52ch; }
+  .studio dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: .9375rem; }
+  .studio dt { color: var(--lavande); font-weight: 500; }
+  .studio dd { margin: 0; }
+
+  /* ---------- Avis (exemples fictifs) ---------- */
+  .avis-liste { display: grid; gap: 14px; }
+  .avis-carte {
+    background: var(--carte); border: 1px solid var(--carte-2); border-radius: var(--rayon); padding: 18px;
+  }
+  .etoiles { color: var(--rose); letter-spacing: .1em; font-size: .9375rem; margin-bottom: 8px; display: block; }
+  .avis-carte blockquote { margin: 0 0 10px; font-size: .9375rem; }
+  .avis-carte .auteur { margin: 0; font-size: .8125rem; color: var(--gris); }
+  .etiquette {
+    display: inline-block; font-size: .75rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--nuit); background: var(--lavande); padding: 3px 8px; border-radius: 999px;
+  }
+
+  /* ---------- Formulaire de démonstration ---------- */
+  .reservation { scroll-margin-top: 16px; }
+  .formulaire {
+    background: var(--carte); border: 1px solid var(--carte-2); border-radius: var(--rayon);
+    padding: clamp(16px, 5vw, 22px); /* 18 px à 360 px : les options courtes du menu déroulant (« Knotless · 6 h · 130 € ») restent lisibles en entier, « € » compris */
+    display: grid; gap: 16px;
+  }
+  .champ { display: grid; gap: 6px; }
+  .champ label { font-size: .875rem; font-weight: 500; color: var(--lavande); }
+  .champ input, .champ select {
+    width: 100%; min-height: 48px; padding: 10px 12px; border-radius: 8px;
+    border: 1px solid var(--carte-2); background: var(--nuit); color: var(--blanc);
+    font: inherit; color-scheme: dark;
+  }
+  .champs-2 { display: grid; gap: 16px; }
+  .formulaire .btn { width: 100%; }
+  .message {
+    margin: 0; padding: 14px 16px; border-radius: 8px; font-size: .9375rem;
+    background: rgba(185, 167, 255, .14); border: 1px solid var(--lavande); display: none;
+  }
+  .message.visible { display: block; }
+  .demo-note { font-size: .875rem; color: var(--gris); margin: 0; }
+
+  /* ---------- Pied de page ---------- */
+  .pied { padding: 32px 0 24px; border-top: 1px solid var(--carte-2); color: var(--gris-2); font-size: .8125rem; }
+  .pied p { margin: 0 0 10px; }
+  .pied strong { color: var(--gris); }
+  .pied details { margin: 4px 0; }
+  .pied summary { cursor: pointer; color: var(--lavande); min-height: 44px; padding: 12px 0; } /* 13 px × 1,55 + 2 × 12 px ≈ 44 px : zone cliquable suffisante */
+  .pied details div { padding: 8px 0 0 14px; border-left: 2px solid var(--carte-2); margin-top: 6px; }
+
+  /* ---------- Barre « Réserver » fixe (téléphone) ---------- */
+  .barre {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    background: var(--carte); border-top: 1px solid rgba(255, 79, 163, .6);
+    padding: 0 var(--marge) env(safe-area-inset-bottom);
+  }
+  .barre .contenu { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: var(--barre); padding: 0; }
+  .barre p { margin: 0; line-height: 1.3; min-width: 0; }
+  .barre strong { font-size: .875rem; font-weight: 500; display: block; }
+  .barre span { font-size: .75rem; color: var(--gris); }
+  .barre .btn { min-height: 44px; padding: 0 16px; font-size: .9375rem; flex: 0 0 auto; }
+
+  /* ---------- Ordinateur ---------- */
+  @media (min-width: 900px) {
+    body { padding-bottom: 0; }
+    .barre { display: none; }
+    .entete { position: sticky; top: 0; z-index: 10; background: rgba(18, 15, 26, .92); border-bottom: 1px solid var(--carte-2); }
+    .entete .contenu { flex-wrap: nowrap; }
+    .logo { font-size: 1.25rem; letter-spacing: .15em; }
+    .nav ul { gap: 14px; margin: 0; }
+    .nav a:not(.btn) { font-size: .9375rem; }
+    .nav li:last-child { display: list-item; }
+    .nav .btn { display: inline-flex; min-height: 44px; padding: 0 20px; font-size: .9375rem; }
+    .glisser { display: none; }
+    section { padding: 64px 0; scroll-margin-top: 90px; }
+
+    .accroche .contenu { display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: center; }
+    .accroche h1 { font-size: clamp(36px, 3.7vw, 47px); } /* colonne de 482 à 602 px : 36 px à 900 px, ≈ 47 px à 1280 px, toujours 3 lignes */
+    .accroche .chapo { font-size: 1.125rem; max-width: 44ch; }
+    .accroche .boutons .btn-rose, .accroche .boutons .btn-contour { flex: 0 0 auto; min-width: 180px; }
+    .reel.accroche-visuel { display: flex; max-width: 340px; margin-left: auto; width: 100%; }
+    .accroche-visuel .photo-ici { font-size: .9375rem; }
+
+    .reels { display: grid; grid-template-columns: repeat(5, 1fr); overflow: visible; margin: 0; padding: 0; }
+    .reel { flex: initial; }
+
+    .deux-colonnes { display: grid; grid-template-columns: 1.3fr .9fr; gap: 48px; align-items: start; }
+
+    .studio { grid-template-columns: 300px 1fr; gap: 48px; align-items: center; }
+    .avis-liste { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .reservation .contenu { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: start; }
+    .champs-2 { grid-template-columns: 1fr 1fr; }
+    .formulaire .btn { width: auto; justify-self: start; }
+
+    .pied .contenu { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<a class="evitement" href="#contenu-principal">Aller au contenu</a>
+
+<header class="entete">
+  <div class="contenu">
+    <a class="logo" href="#top" aria-label="Studio Nattéa, retour en haut de page">NATTÉA</a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="#prestations">Prestations</a></li>
+        <li><a href="#reas">Réas</a></li>
+        <li><a href="#avis">Avis</a></li>
+        <li><a class="btn btn-rose" href="#reservation">Réserver</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu-principal">
+
+  <!-- ===== Accroche ===== -->
+  <section class="accroche" id="top" aria-labelledby="titre-accroche">
+    <div class="contenu">
+      <div>
+        <p class="surtitre">Studio · Lyon 7e · Sur rendez-vous</p>
+        <h1 id="titre-accroche">Ta coiffure.<br>Ton moment.<br><span class="rose">Sans DM.</span></h1>
+        <p class="chapo">Knotless, twists, locks, tissages. Réserve ton créneau en 2 minutes : l'acompte bloque ta place, et on ne se perd plus en messages.</p>
+        <div class="boutons">
+          <a class="btn btn-rose" href="#reservation">Réserver</a>
+          <a class="btn btn-contour" href="#reas">Voir le feed</a>
+        </div>
+      </div>
+      <!-- Visuel d'accroche (ordinateur seulement) : espace réservé pour une photo -->
+      <figure class="reel accroche-visuel" aria-hidden="true">
+        <svg class="lecture" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="#F6F2FB" stroke-width="1.2"/><path d="M6.5 5l4 3-4 3z" fill="#F6F2FB"/></svg>
+        <span class="photo-ici">Ta photo ici<br>(format portrait)</span>
+        <figcaption>Knotless · 6 h</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== Galerie « reels » ===== -->
+  <section id="reas" aria-labelledby="titre-reas">
+    <div class="contenu">
+      <div class="titre-section">
+        <h2 class="titre" id="titre-reas">Dernières réas</h2>
+        <span class="glisser" aria-hidden="true">glisser →</span>
+      </div>
+      <div class="reels">
+        <figure class="reel">
+          <svg class="lecture" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="#F6F2FB" stroke-width="1.2"/><path d="M6.5 5l4 3-4 3z" fill="#F6F2FB"/></svg>
+          <span class="photo-ici">Ta photo ici</span>
+          <figcaption>Knotless · 6 h</figcaption>
+        </figure>
+        <figure class="reel lavande">
+          <svg class="lecture" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="#F6F2FB" stroke-width="1.2"/><path d="M6.5 5l4 3-4 3z" fill="#F6F2FB"/></svg>
+          <span class="photo-ici">Ta photo ici</span>
+          <figcaption>Twists · 4 h</figcaption>
+        </figure>
+        <figure class="reel">
+          <svg class="lecture" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="#F6F2FB" stroke-width="1.2"/><path d="M6.5 5l4 3-4 3z" fill="#F6F2FB"/></svg>
+          <span class="photo-ici">Ta photo ici</span>
+          <figcaption>Locks · 4 h</figcaption>
+        </figure>
+        <figure class="reel lavande">
+          <svg class="lecture" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="#F6F2FB" stroke-width="1.2"/><path d="M6.5 5l4 3-4 3z" fill="#F6F2FB"/></svg>
+          <span class="photo-ici">Ta photo ici</span>
+          <figcaption>Tissage · 3 h</figcaption>
+        </figure>
+        <figure class="reel">
+          <svg class="lecture" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="#F6F2FB" stroke-width="1.2"/><path d="M6.5 5l4 3-4 3z" fill="#F6F2FB"/></svg>
+          <span class="photo-ici">Ta photo ici</span>
+          <figcaption>Fulani · 5 h</figcaption>
+        </figure>
+      </div>
+      <p class="note">Les cadres ci-dessus sont des espaces réservés : ils seront remplacés par tes photos et vidéos de réalisations.</p>
+    </div>
+  </section>
+
+  <!-- ===== Prestations + acompte ===== -->
+  <section id="prestations" aria-labelledby="titre-prestations">
+    <div class="contenu deux-colonnes">
+      <div>
+        <h2 class="titre" id="titre-prestations">Prestations</h2>
+        <ul class="prestations">
+          <li>
+            <h3>Knotless braids longues</h3>
+            <p>Tresses · 6 h · mèches comprises</p>
+            <strong class="prix">130 €</strong>
+          </li>
+          <li>
+            <h3>Démarrage de locks</h3>
+            <p>Locks · 4 h · séparation + premier soin</p>
+            <strong class="prix">110 €</strong>
+          </li>
+          <li>
+            <h3>Pose de tissage fermé</h3>
+            <p>Tissage · 3 h · tissage à apporter, pose et coupe comprises</p>
+            <strong class="prix">90 €</strong>
+          </li>
+        </ul>
+        <p class="note">Prix et durées indicatifs (exemples fictifs). Twists, vanilles et retouches : demande un devis au moment de réserver.</p>
+      </div>
+
+      <aside class="acompte" id="acompte" aria-labelledby="titre-acompte">
+        <h2 id="titre-acompte">Acompte à la réservation</h2>
+        <p class="montant">25 €</p>
+        <ol>
+          <li>Tu choisis ta prestation et ton créneau.</li>
+          <li>Tu paies l'acompte de 25 € : ta place est bloquée.</li>
+          <li>Le jour J, il est déduit du prix. Le reste se règle au studio.</li>
+        </ol>
+        <div class="regle">
+          <p><strong>Annulation plus de 48 h avant :</strong> l'acompte est remboursé, ou reporté sur un autre créneau si tu préfères.</p>
+          <p><strong>Annulation à moins de 48 h, ou absence :</strong> l'acompte est conservé. Il couvre le créneau perdu, souvent une demi-journée de travail.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== Le studio ===== -->
+  <section id="studio" aria-labelledby="titre-studio">
+    <div class="contenu studio">
+      <div class="portrait" role="img" aria-label="Espace réservé pour le portrait de la coiffeuse">
+        <span>Ton portrait ici</span>
+      </div>
+      <div>
+        <h2 class="titre" id="titre-studio">Le studio</h2>
+        <p>Un fauteuil, une coiffeuse, et ton créneau rien que pour toi. Pas de salle d'attente, pas de double réservation : quand tu arrives, on commence.</p>
+        <p>Mèches fournies ou apportées, c'est toi qui choisis. Prends de quoi t'occuper, les prestations durent de 3 à 6 h.</p>
+        <dl>
+          <dt>Adresse</dt><dd>Lyon 7e, près de Jean-Macé (adresse exacte envoyée après réservation)</dd>
+          <dt>Horaires</dt><dd>Du mardi au samedi, 9 h – 19 h, sur rendez-vous</dd>
+          <dt>Paiement</dt><dd>Acompte en ligne, reste en carte ou espèces au studio</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Avis (exemples fictifs) ===== -->
+  <section id="avis" aria-labelledby="titre-avis">
+    <div class="contenu">
+      <div class="titre-section">
+        <h2 class="titre" id="titre-avis">Elles en parlent</h2>
+        <span class="etiquette">Exemples fictifs</span>
+      </div>
+      <p class="note avant">Ces trois avis sont inventés pour montrer la mise en page. Ils seront remplacés par de vrais avis de clientes (Google, Instagram), avec leur accord.</p>
+      <div class="avis-liste">
+        <article class="avis-carte">
+          <span class="etoiles" role="img" aria-label="5 étoiles sur 5">★★★★★</span>
+          <blockquote><p>« J'ai réservé un dimanche soir en 2 minutes, sans attendre une réponse en DM. Les knotless ont tenu 7 semaines. »</p></blockquote>
+          <p class="auteur">Amina, knotless longues — avis d'exemple</p>
+        </article>
+        <article class="avis-carte">
+          <span class="etoiles" role="img" aria-label="5 étoiles sur 5">★★★★★</span>
+          <blockquote><p>« L'acompte, au début ça m'a freinée. Au final c'est rassurant : mon créneau était vraiment à moi, pas de retard. »</p></blockquote>
+          <p class="auteur">Chloé, démarrage de locks — avis d'exemple</p>
+        </article>
+        <article class="avis-carte">
+          <span class="etoiles" role="img" aria-label="5 étoiles sur 5">★★★★★</span>
+          <blockquote><p>« Tissage posé en 3 h, coupe nickel, et des conseils pour l'entretien. Je reviens pour mes twists. »</p></blockquote>
+          <p class="auteur">Fatou, tissage fermé — avis d'exemple</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Réservation (démonstration) ===== -->
+  <section class="reservation" id="reservation" aria-labelledby="titre-reservation">
+    <div class="contenu">
+      <div>
+        <h2 class="titre" id="titre-reservation">Réserver</h2>
+        <p class="intro">Choisis ta prestation, ta date et ton heure d'arrivée. L'acompte de 25 € bloque ta place ; le reste se règle au studio.</p>
+        <p class="demo-note" id="demo-note"><span class="etiquette">Démo</span> Ce formulaire est une démonstration : il n'envoie rien et n'enregistre rien. Sur le vrai site, il serait relié à un outil de réservation et de paiement.</p>
+      </div>
+      <form class="formulaire" id="demo-form" aria-describedby="demo-note" novalidate>
+        <div class="champ">
+          <label for="prestation">Prestation</label>
+          <select id="prestation">
+            <option>Knotless · 6 h · 130 €</option>
+            <option>Locks · 4 h · 110 €</option>
+            <option>Tissage · 3 h · 90 €</option>
+          </select>
+        </div>
+        <div class="champs-2">
+          <div class="champ">
+            <label for="date">Date</label>
+            <input type="date" id="date">
+          </div>
+          <div class="champ">
+            <label for="heure">Heure d'arrivée</label>
+            <select id="heure">
+              <option>9 h</option>
+              <option>10 h</option>
+              <option>13 h</option>
+              <option>14 h</option>
+            </select>
+          </div>
+        </div>
+        <div class="champ">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" autocomplete="given-name">
+        </div>
+        <div class="champ">
+          <label for="tel">Téléphone (pour le rappel la veille)</label>
+          <input type="tel" id="tel" autocomplete="tel" inputmode="tel">
+        </div>
+        <button type="submit" class="btn btn-rose">Payer l'acompte</button>
+        <p class="message" id="demo-message" role="status" tabindex="-1"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pied">
+  <div class="contenu">
+    <div>
+      <p><strong>Studio Nattéa</strong> · Lyon 7e · <strong>Salon fictif créé pour un portfolio.</strong> Le nom, l'adresse, les prix, les horaires et les avis sont inventés ; aucun salon réel n'est concerné.</p>
+      <p>Polices : <a href="https://fonts.google.com/specimen/Syne">Syne</a> et <a href="https://fonts.google.com/specimen/DM+Sans">DM Sans</a>, Google Fonts, licence SIL Open Font License 1.1. Aucune image de tiers : les visuels sont des espaces réservés.</p>
+      <p>Page de démonstration réalisée pour un portfolio freelance. Rien n'est vendu ni réservé ici.</p>
+    </div>
+    <div>
+      <details>
+        <summary>Mentions légales (exemple fictif)</summary>
+        <div>
+          <p><strong>Exemple de mentions légales, à remplacer par celles du vrai salon.</strong></p>
+          <p>Éditeur : Studio Nattéa (salon fictif), 00 rue Imaginaire, 69007 Lyon. SIRET : 000 000 000 00000 (fictif). Responsable de la publication : la gérante du salon.</p>
+          <p>Hébergement : à compléter selon l'hébergeur choisi (GitHub Pages ou Netlify).</p>
+          <p>Données personnelles : les polices (Syne, DM Sans) sont chargées depuis Google Fonts. À l'ouverture de la page, le navigateur envoie donc une requête aux serveurs de Google, qui reçoivent l'adresse IP du visiteur. En dehors de cet appel, cette page de démonstration ne collecte aucune donnée, n'utilise aucun cookie et n'enregistre rien de ce qui est saisi dans le formulaire.</p>
+        </div>
+      </details>
+      <p>© 2026 Studio Nattéa — démo portfolio.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Barre fixe en bas, téléphone seulement -->
+<div class="barre">
+  <div class="contenu">
+    <p><strong>Acompte 25 €</strong><span>annulation libre 48 h avant</span></p>
+    <a class="btn btn-rose" href="#reservation">Réserver</a>
+  </div>
+</div>
+
+<script>
+  (function () {
+    // Formulaire de démonstration : rien n'est envoyé, on affiche seulement un message.
+    var formulaire = document.getElementById('demo-form');
+    var message = document.getElementById('demo-message');
+    if (formulaire && message) {
+      formulaire.addEventListener('submit', function (evenement) {
+        evenement.preventDefault();
+        message.textContent = 'Démo : ici, la cliente choisirait son créneau et paierait l’acompte. Rien n’a été envoyé.';
+        message.classList.add('visible');
+        message.focus();
+      });
+    }
+    // La date ne peut pas être dans le passé.
+    var date = document.getElementById('date');
+    if (date) { date.min = new Date().toISOString().slice(0, 10); }
+  })();
+</script>
+</body>
+</html>
