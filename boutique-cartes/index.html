@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repioche — mini charte graphique (démo portfolio)</title>
+<meta name="description" content="Mini charte graphique d'une boutique fictive de cartes à collectionner : logo et versions, zone de protection, palette avec contrastes, polices, règles d'usage et mises en situation. Démonstration pour un portfolio freelance.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='14' y='4' width='52' height='70' rx='8' fill='%231F2430' transform='rotate(-12 40 39)'/%3E%3Crect x='36' y='26' width='52' height='70' rx='8' fill='%23C73E2D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap">
+<style>
+  :root {
+    --anthracite: #1F2430;
+    --corail: #C73E2D;
+    --blanc: #FFFFFF;
+    --perle: #F2F3F5;
+    --ardoise: #5A6170;
+    --bord: #DDE0E5;
+    --ok: #1E6B45;
+    --non: #C73E2D;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--blanc); color: var(--anthracite);
+    font-family: "Work Sans", "Segoe UI", Arial, sans-serif; font-size: 16px; line-height: 1.55;
+  }
+  h1, h2, h3 { font-family: Sora, Arial, sans-serif; font-weight: 700; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(28px, 6vw, 44px); }
+  h2 { font-size: clamp(22px, 4vw, 30px); margin-bottom: 8px; }
+  h3 { font-size: 17px; margin: 0 0 8px; }
+  p { margin: 0 0 10px; }
+  a { color: var(--corail); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--corail); outline-offset: 3px; }
+  code { font-family: ui-monospace, Consolas, monospace; font-size: .92em; background: var(--perle); padding: 1px 6px; border-radius: 4px; }
+  svg { display: block; }
+
+  .page { max-width: 1120px; margin: 0 auto; padding: 0 16px 48px; }
+
+  .bandeau { background: var(--perle); border-bottom: 1px solid var(--bord); padding: 10px 16px; font-size: 14px; text-align: center; color: var(--ardoise); }
+  .bandeau strong { color: var(--anthracite); }
+
+  .entete { padding: 32px 0 24px; border-bottom: 1px solid var(--bord); }
+  .entete .logo-entete { width: 220px; max-width: 70%; margin-bottom: 20px; }
+  .surtitre { font-family: "Work Sans", Arial, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ardoise); margin: 0 0 10px; }
+  .chapo { font-size: 17px; max-width: 64ch; color: var(--ardoise); margin: 12px 0 0; }
+
+  nav.sommaire { padding: 16px 0; border-bottom: 1px solid var(--bord); }
+  nav.sommaire ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  nav.sommaire a { display: inline-block; padding: 10px 14px; border: 1px solid var(--bord); border-radius: 999px; text-decoration: none; color: var(--anthracite); font-size: 14px; font-weight: 500; min-height: 44px; line-height: 22px; }
+  nav.sommaire a:hover { border-color: var(--anthracite); }
+
+  section.partie { padding: 36px 0 8px; border-bottom: 1px solid var(--bord); }
+  .num { display: inline-block; font-family: Sora, Arial, sans-serif; font-weight: 700; color: var(--corail); margin-right: 8px; }
+  .intro { max-width: 64ch; color: var(--ardoise); margin-bottom: 20px; }
+
+  .grille { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px; }
+  .grille > * { min-width: 0; }
+  @media (min-width: 640px) { .grille.deux, .grille.trois { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 960px) { .grille.trois { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+  .carte { border: 1px solid var(--bord); border-radius: 14px; overflow: hidden; background: var(--blanc); }
+  .carte .visuel { padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 180px; }
+  .carte .visuel svg { width: 100%; height: auto; max-width: 300px; }
+  .carte .visuel.horizontal svg { max-width: 360px; }
+  .carte .visuel.symbole svg { max-width: 120px; }
+  .carte .legende { padding: 12px 16px 14px; border-top: 1px solid var(--bord); font-size: 14px; }
+  .carte .legende strong { display: block; font-family: Sora, Arial, sans-serif; font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+  .fond-blanc { background: var(--blanc); }
+  .fond-perle { background: var(--perle); }
+  .fond-anthracite { background: var(--anthracite); }
+  .fond-corail { background: var(--corail); }
+  .fond-noir { background: #000000; }
+
+  .schema { border: 1px solid var(--bord); border-radius: 14px; padding: 16px; background: var(--blanc); margin-bottom: 20px; }
+  .schema svg { width: 100%; height: auto; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--bord); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ardoise); font-weight: 600; }
+  .defilant { overflow-x: auto; margin-bottom: 20px; -webkit-overflow-scrolling: touch; }
+  @media (max-width: 640px) { table { font-size: 13px; } th, td { padding: 8px 6px; } }
+  .ok { color: var(--ok); font-weight: 600; }
+  .non { color: var(--non); font-weight: 600; }
+
+  .teinte { border: 1px solid var(--bord); border-radius: 14px; overflow: hidden; }
+  .teinte .echantillon { height: 96px; }
+  .teinte .infos { padding: 12px 14px; font-size: 14px; }
+  .teinte .infos strong { display: block; font-family: Sora, Arial, sans-serif; font-weight: 600; font-size: 15px; }
+  .teinte .infos code { display: inline-block; margin: 4px 6px 4px 0; }
+
+  .police { border: 1px solid var(--bord); border-radius: 14px; padding: 18px; }
+  .police .specimen { font-size: 40px; line-height: 1.1; margin-bottom: 8px; overflow-wrap: anywhere; }
+  .police .specimen.sora { font-family: Sora, Arial, sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+  .police .specimen.work { font-family: "Work Sans", Arial, sans-serif; font-weight: 500; }
+  .police .alphabet { color: var(--ardoise); font-size: 15px; overflow-wrap: anywhere; margin-bottom: 10px; }
+  .police .alphabet.sora { font-family: Sora, Arial, sans-serif; font-weight: 600; }
+  .police dl { margin: 0; font-size: 14px; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
+  .police dt { color: var(--ardoise); }
+  .police dd { margin: 0; overflow-wrap: anywhere; }
+  .hierarchie { border: 1px solid var(--bord); border-radius: 14px; padding: 18px; margin-top: 16px; }
+  .hierarchie .h-titre { font-family: Sora, Arial, sans-serif; font-weight: 700; font-size: 30px; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .hierarchie .h-sous { font-family: Sora, Arial, sans-serif; font-weight: 600; font-size: 19px; margin-bottom: 6px; }
+  .hierarchie .h-ligne { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ardoise); font-weight: 500; margin-bottom: 8px; }
+  .hierarchie .h-texte { max-width: 60ch; }
+  .hierarchie .h-bouton { display: inline-block; background: var(--corail); color: var(--blanc); font-weight: 600; padding: 12px 18px; border-radius: 8px; text-decoration: none; margin-top: 8px; }
+
+  .regle { border: 1px solid var(--bord); border-radius: 14px; overflow: hidden; }
+  .regle .exemple { padding: 18px; display: flex; align-items: center; justify-content: center; min-height: 150px; }
+  .regle .exemple svg { width: 100%; max-width: 280px; height: auto; }
+  .regle .texte { padding: 12px 16px 14px; border-top: 1px solid var(--bord); font-size: 14px; }
+  .regle .etiquette { display: inline-block; font-family: Sora, Arial, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; margin-bottom: 6px; }
+  .regle.a-faire .etiquette { background: #E3F2EA; color: var(--ok); }
+  .regle.a-eviter .etiquette { background: #FBE6E2; color: #A93322; }
+
+  .situation { border: 1px solid var(--bord); border-radius: 14px; overflow: hidden; }
+  .situation svg { width: 100%; height: auto; }
+  .situation .legende { padding: 12px 16px 14px; border-top: 1px solid var(--bord); font-size: 14px; }
+  .situation .legende strong { display: block; font-family: Sora, Arial, sans-serif; font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+
+  footer.pied { padding: 28px 0 0; font-size: 14px; color: var(--ardoise); }
+  footer.pied p { margin: 0 0 8px; }
+  footer.pied .mention { font-weight: 600; color: var(--anthracite); }
+
+  /* classes utilisées par les SVG du logo (les mêmes que dans les fichiers logo/*.svg) */
+  .mot { font-family: Sora, Arial, sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+  .ligne { font-family: "Work Sans", Arial, sans-serif; font-weight: 500; letter-spacing: 0.18em; }
+</style>
+</head>
+<body>
+
+<!-- Symbole réutilisé dans les schémas et mises en situation (même géométrie que logo/repioche-logo-symbole-*.svg) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <mask id="m-dos" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+      <rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/>
+    </mask>
+    <mask id="m-face" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+      <rect width="100" height="100" fill="#fff"/>
+      <path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/>
+      <polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/>
+    </mask>
+    <symbol id="sym-couleur" viewBox="0 0 100 100">
+      <g mask="url(#m-dos)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#1F2430" transform="rotate(-12 46 40)"/></g>
+      <rect x="40" y="30" width="44" height="60" rx="6" fill="#C73E2D" mask="url(#m-face)"/>
+    </symbol>
+    <symbol id="sym-blanc" viewBox="0 0 100 100">
+      <g mask="url(#m-dos)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#FFFFFF" transform="rotate(-12 46 40)"/></g>
+      <rect x="40" y="30" width="44" height="60" rx="6" fill="#FFFFFF" mask="url(#m-face)"/>
+    </symbol>
+    <symbol id="sym-noir" viewBox="0 0 100 100">
+      <g mask="url(#m-dos)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#000000" transform="rotate(-12 46 40)"/></g>
+      <rect x="40" y="30" width="44" height="60" rx="6" fill="#000000" mask="url(#m-face)"/>
+    </symbol>
+    <symbol id="sym-vert" viewBox="0 0 100 100">
+      <g mask="url(#m-dos)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#1F4D3A" transform="rotate(-12 46 40)"/></g>
+      <rect x="40" y="30" width="44" height="60" rx="6" fill="#7BC96F" mask="url(#m-face)"/>
+    </symbol>
+    <symbol id="sym-corail-plein" viewBox="0 0 100 100">
+      <g mask="url(#m-dos)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#C73E2D" transform="rotate(-12 46 40)"/></g>
+      <rect x="40" y="30" width="44" height="60" rx="6" fill="#C73E2D" mask="url(#m-face)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="bandeau"><strong>Boutique fictive</strong> — cette mini charte est une démonstration créée pour un portfolio freelance. Le nom, la ville et la marque sont inventés.</div>
+
+<div class="page">
+
+  <header class="entete">
+    <div class="logo-entete"><!-- @logo principal-couleur --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-labelledby="rp-couleur-t-i1 rp-couleur-d-i1">
+<title id="rp-couleur-t-i1">Repioche — logo principal (couleur)</title>
+<desc id="rp-couleur-d-i1">Deux cartes à jouer décalées, la carte de devant porte une flèche courbe évidée ; en dessous, le nom Repioche et la ligne Cartes à collectionner, Angers. Boutique fictive créée pour un portfolio.</desc>
+<g transform="translate(115 6) scale(1.3)"><g><mask id="rp-couleur-m-dos-i1" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/></mask><mask id="rp-couleur-m-face-i1" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/><polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/></mask><g mask="url(#rp-couleur-m-dos-i1)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#1F2430" transform="rotate(-12 46 40)"/></g><rect x="40" y="30" width="44" height="60" rx="6" fill="#C73E2D" mask="url(#rp-couleur-m-face-i1)"/></g></g>
+<text class="mot" x="180" y="222" text-anchor="middle" font-size="58" fill="#1F2430">Repioche</text>
+<text class="ligne" x="181" y="256" text-anchor="middle" font-size="12.5" fill="#5A6170">CARTES À COLLECTIONNER · ANGERS</text>
+</svg><!-- @fin --></div>
+    <p class="surtitre">Mini charte graphique · version 1 · octobre 2026</p>
+    <h1>Repioche — comment utiliser la marque</h1>
+    <p class="chapo">Repioche est une boutique de cartes à collectionner (jeux de cartes, cartes de sport, accessoires, achat-vente d'occasion), avec un magasin à Angers et une vente en ligne. Cette charte en six points donne tout ce qu'il faut pour que le logo, les couleurs et les polices restent les mêmes sur l'enseigne, le site, les réseaux et les cartes de visite.</p>
+  </header>
+
+  <nav class="sommaire" aria-label="Sommaire">
+    <ol>
+      <li><a href="#logo">1 · Le logo</a></li>
+      <li><a href="#protection">2 · Zone de protection et tailles</a></li>
+      <li><a href="#couleurs">3 · Couleurs</a></li>
+      <li><a href="#polices">4 · Polices</a></li>
+      <li><a href="#usages">5 · À faire, à éviter</a></li>
+      <li><a href="#situations">6 · Mises en situation</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. LOGO -->
+  <section class="partie" id="logo" aria-labelledby="t-logo">
+    <h2 id="t-logo"><span class="num">1</span>Le logo et ses versions</h2>
+    <p class="intro">Le logo se compose d'un <strong>symbole</strong> (deux cartes décalées, la carte de devant porte une flèche courbe évidée : le geste de « repiocher ») et du <strong>nom</strong> en Sora, avec une ligne de description en Work Sans. Trois dispositions, trois couleurs : neuf fichiers SVG, plus un favicon.</p>
+
+    <h3>Les trois dispositions</h3>
+    <div class="grille trois">
+      <div class="carte">
+        <div class="visuel fond-blanc"><!-- @logo principal-couleur --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-labelledby="rp-couleur-t-i2 rp-couleur-d-i2">
+<title id="rp-couleur-t-i2">Repioche — logo principal (couleur)</title>
+<desc id="rp-couleur-d-i2">Deux cartes à jouer décalées, la carte de devant porte une flèche courbe évidée ; en dessous, le nom Repioche et la ligne Cartes à collectionner, Angers. Boutique fictive créée pour un portfolio.</desc>
+<g transform="translate(115 6) scale(1.3)"><g><mask id="rp-couleur-m-dos-i2" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/></mask><mask id="rp-couleur-m-face-i2" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/><polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/></mask><g mask="url(#rp-couleur-m-dos-i2)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#1F2430" transform="rotate(-12 46 40)"/></g><rect x="40" y="30" width="44" height="60" rx="6" fill="#C73E2D" mask="url(#rp-couleur-m-face-i2)"/></g></g>
+<text class="mot" x="180" y="222" text-anchor="middle" font-size="58" fill="#1F2430">Repioche</text>
+<text class="ligne" x="181" y="256" text-anchor="middle" font-size="12.5" fill="#5A6170">CARTES À COLLECTIONNER · ANGERS</text>
+</svg><!-- @fin --></div>
+        <div class="legende"><strong>Principal (vertical)</strong>À utiliser en premier : enseigne, avatar carré, page d'accueil, sachets, affiches. Fichier <code>repioche-logo-principal-couleur.svg</code>.</div>
+      </div>
+      <div class="carte">
+        <div class="visuel horizontal fond-blanc"><!-- @logo horizontal-couleur --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" role="img" aria-labelledby="rh-couleur-t-i3 rh-couleur-d-i3">
+<title id="rh-couleur-t-i3">Repioche — logo horizontal (couleur)</title>
+<desc id="rh-couleur-d-i3">Le symbole des deux cartes à gauche, le nom Repioche et la ligne Cartes à collectionner, Angers à droite. Boutique fictive créée pour un portfolio.</desc>
+<g transform="translate(6 10)"><g><mask id="rh-couleur-m-dos-i3" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/></mask><mask id="rh-couleur-m-face-i3" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/><polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/></mask><g mask="url(#rh-couleur-m-dos-i3)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#1F2430" transform="rotate(-12 46 40)"/></g><rect x="40" y="30" width="44" height="60" rx="6" fill="#C73E2D" mask="url(#rh-couleur-m-face-i3)"/></g></g>
+<text class="mot" x="118" y="74" font-size="56" fill="#1F2430">Repioche</text>
+<text class="ligne" x="121" y="102" font-size="12" fill="#5A6170">CARTES À COLLECTIONNER · ANGERS</text>
+</svg><!-- @fin --></div>
+        <div class="legende"><strong>Horizontal</strong>Quand la hauteur manque : en-tête de site, carte de visite, factures, bandeau de réseau social. Fichier <code>repioche-logo-horizontal-couleur.svg</code>.</div>
+      </div>
+      <div class="carte">
+        <div class="visuel symbole fond-blanc"><!-- @logo symbole-couleur --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="rs-couleur-t-i4 rs-couleur-d-i4">
+<title id="rs-couleur-t-i4">Repioche — symbole seul (couleur)</title>
+<desc id="rs-couleur-d-i4">Deux cartes à jouer décalées ; la carte de devant porte une flèche courbe évidée, le geste de repiocher. Boutique fictive créée pour un portfolio.</desc>
+
+<g><mask id="rs-couleur-m-dos-i4" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/></mask><mask id="rs-couleur-m-face-i4" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/><polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/></mask><g mask="url(#rs-couleur-m-dos-i4)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#1F2430" transform="rotate(-12 46 40)"/></g><rect x="40" y="30" width="44" height="60" rx="6" fill="#C73E2D" mask="url(#rs-couleur-m-face-i4)"/></g>
+</svg><!-- @fin --></div>
+        <div class="legende"><strong>Symbole seul</strong>Petites tailles et formats carrés : avatar rond, favicon, étiquettes, tampon. Toujours accompagné du nom quelque part sur le support. Fichier <code>repioche-logo-symbole-couleur.svg</code>.</div>
+      </div>
+    </div>
+
+    <h3>Les trois couleurs</h3>
+    <div class="grille trois">
+      <div class="carte">
+        <div class="visuel fond-blanc"><!-- @logo principal-couleur --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-labelledby="rp-couleur-t-i5 rp-couleur-d-i5">
+<title id="rp-couleur-t-i5">Repioche — logo principal (couleur)</title>
+<desc id="rp-couleur-d-i5">Deux cartes à jouer décalées, la carte de devant porte une flèche courbe évidée ; en dessous, le nom Repioche et la ligne Cartes à collectionner, Angers. Boutique fictive créée pour un portfolio.</desc>
+<g transform="translate(115 6) scale(1.3)"><g><mask id="rp-couleur-m-dos-i5" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/></mask><mask id="rp-couleur-m-face-i5" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/><polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/></mask><g mask="url(#rp-couleur-m-dos-i5)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#1F2430" transform="rotate(-12 46 40)"/></g><rect x="40" y="30" width="44" height="60" rx="6" fill="#C73E2D" mask="url(#rp-couleur-m-face-i5)"/></g></g>
+<text class="mot" x="180" y="222" text-anchor="middle" font-size="58" fill="#1F2430">Repioche</text>
+<text class="ligne" x="181" y="256" text-anchor="middle" font-size="12.5" fill="#5A6170">CARTES À COLLECTIONNER · ANGERS</text>
+</svg><!-- @fin --></div>
+        <div class="legende"><strong>Couleur</strong>Sur fond blanc ou gris perle. C'est la version par défaut.</div>
+      </div>
+      <div class="carte">
+        <div class="visuel fond-anthracite"><!-- @logo principal-blanc --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-labelledby="rp-blanc-t-i6 rp-blanc-d-i6">
+<title id="rp-blanc-t-i6">Repioche — logo principal (blanc)</title>
+<desc id="rp-blanc-d-i6">Deux cartes à jouer décalées, la carte de devant porte une flèche courbe évidée ; en dessous, le nom Repioche et la ligne Cartes à collectionner, Angers. Boutique fictive créée pour un portfolio.</desc>
+<g transform="translate(115 6) scale(1.3)"><g><mask id="rp-blanc-m-dos-i6" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/></mask><mask id="rp-blanc-m-face-i6" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/><polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/></mask><g mask="url(#rp-blanc-m-dos-i6)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#FFFFFF" transform="rotate(-12 46 40)"/></g><rect x="40" y="30" width="44" height="60" rx="6" fill="#FFFFFF" mask="url(#rp-blanc-m-face-i6)"/></g></g>
+<text class="mot" x="180" y="222" text-anchor="middle" font-size="58" fill="#FFFFFF">Repioche</text>
+<text class="ligne" x="181" y="256" text-anchor="middle" font-size="12.5" fill="#FFFFFF">CARTES À COLLECTIONNER · ANGERS</text>
+</svg><!-- @fin --></div>
+        <div class="legende"><strong>Blanc</strong>Sur fond anthracite, corail, ou sur une photo sombre. Fichiers <code>*-blanc.svg</code>.</div>
+      </div>
+      <div class="carte">
+        <div class="visuel fond-blanc"><!-- @logo principal-noir --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-labelledby="rp-noir-t-i7 rp-noir-d-i7">
+<title id="rp-noir-t-i7">Repioche — logo principal (noir)</title>
+<desc id="rp-noir-d-i7">Deux cartes à jouer décalées, la carte de devant porte une flèche courbe évidée ; en dessous, le nom Repioche et la ligne Cartes à collectionner, Angers. Boutique fictive créée pour un portfolio.</desc>
+<g transform="translate(115 6) scale(1.3)"><g><mask id="rp-noir-m-dos-i7" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/></mask><mask id="rp-noir-m-face-i7" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/><polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/></mask><g mask="url(#rp-noir-m-dos-i7)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#000000" transform="rotate(-12 46 40)"/></g><rect x="40" y="30" width="44" height="60" rx="6" fill="#000000" mask="url(#rp-noir-m-face-i7)"/></g></g>
+<text class="mot" x="180" y="222" text-anchor="middle" font-size="58" fill="#000000">Repioche</text>
+<text class="ligne" x="181" y="256" text-anchor="middle" font-size="12.5" fill="#000000">CARTES À COLLECTIONNER · ANGERS</text>
+</svg><!-- @fin --></div>
+        <div class="legende"><strong>Noir</strong>Impression en une couleur (facture, tampon, gravure, broderie), fax, photocopie. Fichiers <code>*-noir.svg</code>.</div>
+      </div>
+    </div>
+
+    <div class="grille trois">
+      <div class="carte">
+        <div class="visuel horizontal fond-corail"><!-- @logo horizontal-blanc --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" role="img" aria-labelledby="rh-blanc-t-i8 rh-blanc-d-i8">
+<title id="rh-blanc-t-i8">Repioche — logo horizontal (blanc)</title>
+<desc id="rh-blanc-d-i8">Le symbole des deux cartes à gauche, le nom Repioche et la ligne Cartes à collectionner, Angers à droite. Boutique fictive créée pour un portfolio.</desc>
+<g transform="translate(6 10)"><g><mask id="rh-blanc-m-dos-i8" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/></mask><mask id="rh-blanc-m-face-i8" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/><polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/></mask><g mask="url(#rh-blanc-m-dos-i8)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#FFFFFF" transform="rotate(-12 46 40)"/></g><rect x="40" y="30" width="44" height="60" rx="6" fill="#FFFFFF" mask="url(#rh-blanc-m-face-i8)"/></g></g>
+<text class="mot" x="118" y="74" font-size="56" fill="#FFFFFF">Repioche</text>
+<text class="ligne" x="121" y="102" font-size="12" fill="#FFFFFF">CARTES À COLLECTIONNER · ANGERS</text>
+</svg><!-- @fin --></div>
+        <div class="legende"><strong>Horizontal blanc sur corail</strong>Pour les bandeaux et les promotions ; le corail reste rare, il garde sa force.</div>
+      </div>
+      <div class="carte">
+        <div class="visuel symbole fond-anthracite"><!-- @logo symbole-blanc --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="rs-blanc-t-i9 rs-blanc-d-i9">
+<title id="rs-blanc-t-i9">Repioche — symbole seul (blanc)</title>
+<desc id="rs-blanc-d-i9">Deux cartes à jouer décalées ; la carte de devant porte une flèche courbe évidée, le geste de repiocher. Boutique fictive créée pour un portfolio.</desc>
+
+<g><mask id="rs-blanc-m-dos-i9" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><rect x="37" y="27" width="50" height="66" rx="8" fill="#000"/></mask><mask id="rs-blanc-m-face-i9" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M51.7 65.8 A11 11 0 1 1 73 62" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"/><polygon points="67.5,61 78.5,61 73,69.5" fill="#000"/></mask><g mask="url(#rs-blanc-m-dos-i9)"><rect x="24" y="10" width="44" height="60" rx="6" fill="#FFFFFF" transform="rotate(-12 46 40)"/></g><rect x="40" y="30" width="44" height="60" rx="6" fill="#FFFFFF" mask="url(#rs-blanc-m-face-i9)"/></g>
+</svg><!-- @fin --></div>
+        <div class="legende"><strong>Symbole blanc</strong>Avatar sur fond sombre, icône d'application.</div>
+      </div>
+      <div class="carte">
+        <div class="visuel symbole fond-perle"><!-- @logo favicon --><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Repioche">
+<rect x="14" y="4" width="52" height="70" rx="8" fill="#1F2430" transform="rotate(-12 40 39)"/>
+<rect x="36" y="26" width="52" height="70" rx="8" fill="#C73E2D"/>
+</svg><!-- @fin --></div>
+        <div class="legende"><strong>Favicon</strong>Les deux cartes seules, agrandies, sans la flèche (illisible à 16 px). Fichier <code>favicon.svg</code>.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PROTECTION ET TAILLES -->
+  <section class="partie" id="protection" aria-labelledby="t-protection">
+    <h2 id="t-protection"><span class="num">2</span>Zone de protection et tailles minimales</h2>
+    <p class="intro">Autour du logo, on laisse toujours un espace vide égal à la <strong>largeur de la carte de devant</strong> (notée « x »). Rien n'entre dans cette zone : ni texte, ni autre logo, ni bord de page.</p>
+
+    <div class="schema" role="img" aria-label="Schéma de la zone de protection : le logo horizontal entouré d'une marge égale à la largeur x de la carte de devant">
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="20" width="600" height="220" fill="#F2F3F5" rx="10"/>
+        <rect x="80" y="70" width="480" height="120" fill="none" stroke="#C73E2D" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <!-- marges x -->
+        <g fill="#C73E2D" font-family="Work Sans, Arial, sans-serif" font-size="14" font-weight="600">
+          <text x="50" y="135" text-anchor="middle">x</text>
+          <text x="590" y="135" text-anchor="middle">x</text>
+          <text x="320" y="51" text-anchor="middle">x</text>
+          <text x="420" y="221" text-anchor="middle">x</text>
+        </g>
+        <g stroke="#C73E2D" stroke-width="1.5">
+          <line x1="80" y1="30" x2="80" y2="60"/><line x1="560" y1="30" x2="560" y2="60"/>
+          <line x1="30" y1="70" x2="60" y2="70"/><line x1="30" y1="190" x2="60" y2="190"/>
+        </g>
+        <!-- logo horizontal -->
+        <g transform="translate(96 86)">
+          <use href="#sym-couleur" width="88" height="88"/>
+          <text x="104" y="60" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="48" letter-spacing="-1" fill="#1F2430">Repioche</text>
+          <text x="106" y="82" font-family="Work Sans, Arial, sans-serif" font-weight="500" font-size="10.5" letter-spacing="2.2" fill="#5A6170">CARTES À COLLECTIONNER · ANGERS</text>
+        </g>
+        <!-- repère de la largeur x sur la carte de devant -->
+        <line x1="131" y1="204" x2="170" y2="204" stroke="#C73E2D" stroke-width="2"/>
+        <line x1="131" y1="199" x2="131" y2="209" stroke="#C73E2D" stroke-width="2"/>
+        <line x1="170" y1="199" x2="170" y2="209" stroke="#C73E2D" stroke-width="2"/>
+        <text x="150" y="226" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="12" font-weight="600" fill="#C73E2D">x = largeur de la carte</text>
+      </svg>
+    </div>
+
+    <div class="defilant">
+      <table>
+        <caption class="surtitre" style="text-align:left;padding:0 0 8px">Tailles minimales</caption>
+        <thead><tr><th scope="col">Version</th><th scope="col">Écran (largeur)</th><th scope="col">Impression (largeur)</th><th scope="col">En dessous</th></tr></thead>
+        <tbody>
+          <tr><td>Principal (vertical)</td><td>120 px</td><td>25 mm</td><td>passer à l'horizontal ou au symbole</td></tr>
+          <tr><td>Horizontal</td><td>140 px</td><td>30 mm</td><td>passer au symbole seul</td></tr>
+          <tr><td>Symbole seul</td><td>24 px</td><td>6 mm</td><td>utiliser le favicon (deux cartes sans flèche)</td></tr>
+          <tr><td>Favicon</td><td>16 px</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="intro">En dessous de ces tailles, la ligne « Cartes à collectionner · Angers » devient illisible : on la retire avant de réduire le logo, jamais l'inverse.</p>
+  </section>
+
+  <!-- 3. COULEURS -->
+  <section class="partie" id="couleurs" aria-labelledby="t-couleurs">
+    <h2 id="t-couleurs"><span class="num">3</span>Couleurs</h2>
+    <p class="intro">Cinq couleurs, dont une seule d'accent. Le corail sert aux boutons, aux prix et à la carte de devant ; tout le reste est anthracite, blanc et gris. Les codes hexadécimaux sont ceux des fichiers SVG.</p>
+
+    <div class="grille trois">
+      <div class="teinte"><div class="echantillon" style="background:#1F2430"></div><div class="infos"><strong>Anthracite</strong><code>#1F2430</code><code>RVB 31 36 48</code>Texte, carte du fond, nom du logo, fonds sombres.</div></div>
+      <div class="teinte"><div class="echantillon" style="background:#C73E2D"></div><div class="infos"><strong>Corail</strong><code>#C73E2D</code><code>RVB 199 62 45</code>Accent : carte de devant, boutons, prix, liens. Jamais plus de 10 % d'une page.</div></div>
+      <div class="teinte"><div class="echantillon" style="background:#FFFFFF;border-bottom:1px solid var(--bord)"></div><div class="infos"><strong>Blanc</strong><code>#FFFFFF</code><code>RVB 255 255 255</code>Fond principal, logo sur fond sombre.</div></div>
+      <div class="teinte"><div class="echantillon" style="background:#F2F3F5"></div><div class="infos"><strong>Gris perle</strong><code>#F2F3F5</code><code>RVB 242 243 245</code>Fonds secondaires, cartes de visite, séparations.</div></div>
+      <div class="teinte"><div class="echantillon" style="background:#5A6170"></div><div class="infos"><strong>Gris ardoise</strong><code>#5A6170</code><code>RVB 90 97 112</code>Texte secondaire, ligne de description, légendes.</div></div>
+    </div>
+
+    <h3>Contrastes vérifiés (WCAG 2.1)</h3>
+    <p class="intro">Rapports calculés avec la formule de luminance relative de WCAG 2.1. Seuil retenu pour le texte courant : <strong>4,5:1</strong> (niveau AA) ; 3:1 pour les grands titres et les éléments d'interface.</p>
+    <div class="defilant">
+      <table>
+        <thead><tr><th scope="col">Texte</th><th scope="col">Fond</th><th scope="col">Rapport</th><th scope="col">Texte courant</th></tr></thead>
+        <tbody>
+          <tr><td>Anthracite</td><td>Blanc</td><td>15,5:1</td><td class="ok">Oui</td></tr>
+          <tr><td>Anthracite</td><td>Gris perle</td><td>14,0:1</td><td class="ok">Oui</td></tr>
+          <tr><td>Gris ardoise</td><td>Blanc</td><td>6,2:1</td><td class="ok">Oui</td></tr>
+          <tr><td>Gris ardoise</td><td>Gris perle</td><td>5,6:1</td><td class="ok">Oui</td></tr>
+          <tr><td>Corail</td><td>Blanc</td><td>5,1:1</td><td class="ok">Oui</td></tr>
+          <tr><td>Corail</td><td>Gris perle</td><td>4,6:1</td><td class="ok">Oui</td></tr>
+          <tr><td>Blanc</td><td>Corail</td><td>5,1:1</td><td class="ok">Oui (boutons)</td></tr>
+          <tr><td>Blanc</td><td>Anthracite</td><td>15,5:1</td><td class="ok">Oui</td></tr>
+          <tr><td>Gris perle</td><td>Anthracite</td><td>14,0:1</td><td class="ok">Oui</td></tr>
+          <tr><td>Corail</td><td>Anthracite</td><td>2,7:1</td><td class="non">Non — interdit pour du texte, et pour le logo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4. POLICES -->
+  <section class="partie" id="polices" aria-labelledby="t-polices">
+    <h2 id="t-polices"><span class="num">4</span>Polices</h2>
+    <p class="intro">Deux polices libres, disponibles sur Google Fonts sous licence SIL Open Font License 1.1 : usage gratuit, y compris commercial, sur le web comme en impression. Elles peuvent être téléchargées et installées sur n'importe quel ordinateur de la boutique.</p>
+    <div class="grille deux">
+      <div class="police">
+        <div class="specimen sora">Repioche</div>
+        <div class="alphabet sora">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 éàçù</div>
+        <dl>
+          <dt>Nom</dt><dd><strong>Sora</strong> — graisse 700 pour le logo et les titres, 600 pour les sous-titres</dd>
+          <dt>Rôle</dt><dd>Le nom du logo, les titres, les prix mis en avant</dd>
+          <dt>Source</dt><dd><a href="https://fonts.google.com/specimen/Sora">fonts.google.com/specimen/Sora</a></dd>
+          <dt>Licence</dt><dd>SIL Open Font License 1.1</dd>
+        </dl>
+      </div>
+      <div class="police">
+        <div class="specimen work">Cartes à collectionner</div>
+        <div class="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 éàçù</div>
+        <dl>
+          <dt>Nom</dt><dd><strong>Work Sans</strong> — graisse 400 pour le texte, 500 pour les lignes en capitales, 600 pour les boutons</dd>
+          <dt>Rôle</dt><dd>Tout le texte courant, les lignes en capitales espacées (lettres espacées de 0,18 em), les boutons, les étiquettes</dd>
+          <dt>Source</dt><dd><a href="https://fonts.google.com/specimen/Work+Sans">fonts.google.com/specimen/Work+Sans</a></dd>
+          <dt>Licence</dt><dd>SIL Open Font License 1.1</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="hierarchie" aria-label="Exemple de hiérarchie de texte">
+      <div class="h-ligne">Exemple de hiérarchie</div>
+      <div class="h-titre">Rachat de vos cartes, estimation gratuite</div>
+      <div class="h-sous">Apportez vos classeurs, repartez avec un bon d'achat ou un virement</div>
+      <p class="h-texte">Texte courant en Work Sans 400, 16 px au minimum sur écran. Les paragraphes restent courts, les prix s'écrivent avec l'espace avant le symbole : 12,50 €.</p>
+      <span class="h-bouton">Prendre rendez-vous</span>
+    </div>
+    <p class="intro" style="margin-top:16px">Si les polices ne sont pas disponibles (document envoyé à un imprimeur sans les fichiers, courriel), on utilise <strong>Arial</strong> en remplacement, jamais une police décorative.</p>
+  </section>
+
+  <!-- 5. USAGES -->
+  <section class="partie" id="usages" aria-labelledby="t-usages">
+    <h2 id="t-usages"><span class="num">5</span>À faire, à éviter</h2>
+    <p class="intro">Les fichiers SVG sont fournis tels quels : on les place, on les réduit ou on les agrandit en gardant les proportions, et c'est tout.</p>
+
+    <h3>À faire</h3>
+    <div class="grille trois">
+      <div class="regle a-faire">
+        <div class="exemple fond-blanc">
+          <svg viewBox="0 0 280 120" role="img" aria-label="Logo horizontal couleur sur fond blanc, avec sa marge"><use href="#sym-couleur" x="18" y="16" width="88" height="88"/><text x="118" y="70" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.7" fill="#1F2430">Repioche</text></svg>
+        </div>
+        <div class="texte"><span class="etiquette">À faire</span><br>Version couleur sur fond blanc ou gris perle, avec sa zone de protection.</div>
+      </div>
+      <div class="regle a-faire">
+        <div class="exemple fond-anthracite">
+          <svg viewBox="0 0 280 120" role="img" aria-label="Logo horizontal blanc sur fond anthracite"><use href="#sym-blanc" x="18" y="16" width="88" height="88"/><text x="118" y="70" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.7" fill="#FFFFFF">Repioche</text></svg>
+        </div>
+        <div class="texte"><span class="etiquette">À faire</span><br>Sur fond sombre ou sur photo, la version blanche, entière.</div>
+      </div>
+      <div class="regle a-faire">
+        <div class="exemple fond-perle">
+          <svg viewBox="0 0 280 120" role="img" aria-label="Symbole seul à petite taille dans un rond, à côté du favicon"><circle cx="70" cy="60" r="40" fill="#1F2430"/><use href="#sym-blanc" x="38" y="28" width="64" height="64"/><rect x="150" y="44" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#DDE0E5"/><g transform="translate(154 48) scale(0.24)"><rect x="14" y="4" width="52" height="70" rx="8" fill="#1F2430" transform="rotate(-12 40 39)"/><rect x="36" y="26" width="52" height="70" rx="8" fill="#C73E2D"/></g><text x="198" y="66" font-family="Work Sans, Arial, sans-serif" font-size="12" fill="#5A6170">16 px</text></svg>
+        </div>
+        <div class="texte"><span class="etiquette">À faire</span><br>En petit : le symbole seul (avatar), puis le favicon en dessous de 24 px.</div>
+      </div>
+    </div>
+
+    <h3>À éviter</h3>
+    <div class="grille trois">
+      <div class="regle a-eviter">
+        <div class="exemple fond-blanc">
+          <svg viewBox="0 0 280 120" role="img" aria-label="Logo déformé, étiré en largeur"><g transform="translate(52 2) scale(0.78 1.3)"><use href="#sym-couleur" width="88" height="88"/><text x="92" y="62" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.7" fill="#1F2430">Repioche</text></g><line x1="14" y1="14" x2="266" y2="106" stroke="#C73E2D" stroke-width="3"/></svg>
+        </div>
+        <div class="texte"><span class="etiquette">À éviter</span><br>Déformer : pas d'étirement en largeur ni en hauteur. On garde les proportions du fichier.</div>
+      </div>
+      <div class="regle a-eviter">
+        <div class="exemple fond-blanc">
+          <svg viewBox="0 0 280 120" role="img" aria-label="Logo recoloré en vert"><use href="#sym-vert" x="18" y="16" width="88" height="88"/><text x="118" y="70" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.7" fill="#1F4D3A">Repioche</text><line x1="14" y1="14" x2="266" y2="106" stroke="#C73E2D" stroke-width="3"/></svg>
+        </div>
+        <div class="texte"><span class="etiquette">À éviter</span><br>Changer les couleurs, même pour une saison ou une promotion. Trois versions existent, pas une de plus.</div>
+      </div>
+      <div class="regle a-eviter">
+        <div class="exemple fond-anthracite">
+          <svg viewBox="0 0 280 120" role="img" aria-label="Logo couleur posé sur fond anthracite : le corail ne ressort pas"><use href="#sym-corail-plein" x="18" y="16" width="88" height="88"/><text x="118" y="70" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.7" fill="#C73E2D">Repioche</text><line x1="14" y1="14" x2="266" y2="106" stroke="#FFFFFF" stroke-width="3"/></svg>
+        </div>
+        <div class="texte"><span class="etiquette">À éviter</span><br>Du corail sur l'anthracite (contraste 2,7:1) : sur fond sombre, c'est la version blanche.</div>
+      </div>
+      <div class="regle a-eviter">
+        <div class="exemple fond-blanc">
+          <svg viewBox="0 0 280 120" role="img" aria-label="Logo avec ombre portée et contour"><g transform="translate(4 4)" opacity="0.35"><use href="#sym-noir" x="18" y="16" width="88" height="88"/><text x="118" y="70" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.7" fill="#000">Repioche</text></g><use href="#sym-couleur" x="18" y="16" width="88" height="88"/><text x="118" y="70" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.7" fill="#1F2430" stroke="#C73E2D" stroke-width="1.5" paint-order="stroke">Repioche</text><line x1="14" y1="14" x2="266" y2="106" stroke="#C73E2D" stroke-width="3"/></svg>
+        </div>
+        <div class="texte"><span class="etiquette">À éviter</span><br>Ajouter des effets : ombre, contour, dégradé, relief, transparence.</div>
+      </div>
+      <div class="regle a-eviter">
+        <div class="exemple fond-blanc">
+          <svg viewBox="0 0 280 120" role="img" aria-label="Logo incliné"><g transform="rotate(-18 140 60)"><use href="#sym-couleur" x="18" y="16" width="88" height="88"/><text x="118" y="70" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.7" fill="#1F2430">Repioche</text></g><line x1="14" y1="14" x2="266" y2="106" stroke="#C73E2D" stroke-width="3"/></svg>
+        </div>
+        <div class="texte"><span class="etiquette">À éviter</span><br>Incliner ou faire tourner le logo. Les cartes sont déjà en mouvement, c'est suffisant.</div>
+      </div>
+      <div class="regle a-eviter">
+        <div class="exemple fond-blanc">
+          <svg viewBox="0 0 280 120" role="img" aria-label="Logo posé sur un fond chargé de motifs"><rect width="280" height="120" fill="#F2F3F5"/><g fill="#C73E2D" opacity="0.5"><circle cx="30" cy="20" r="14"/><circle cx="90" cy="100" r="18"/><circle cx="250" cy="30" r="22"/><rect x="150" y="80" width="60" height="40" rx="8"/><rect x="200" y="0" width="30" height="30" rx="6" transform="rotate(20 215 15)"/></g><use href="#sym-couleur" x="18" y="16" width="88" height="88"/><text x="118" y="70" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.7" fill="#1F2430">Repioche</text><line x1="14" y1="14" x2="266" y2="106" stroke="#C73E2D" stroke-width="3"/></svg>
+        </div>
+        <div class="texte"><span class="etiquette">À éviter</span><br>Poser le logo sur un fond chargé ou une photo contrastée sans aplat blanc ou anthracite derrière.</div>
+      </div>
+    </div>
+
+    <h3>Autres règles</h3>
+    <ul class="intro" style="padding-left:20px">
+      <li>Le nom s'écrit <strong>Repioche</strong> : une majuscule, pas d'accent, pas de « La », pas de trait d'union.</li>
+      <li>On ne recompose jamais le logo avec la police : on utilise les fichiers SVG ou PNG fournis.</li>
+      <li>La ligne « Cartes à collectionner · Angers » peut être retirée (petites tailles) mais jamais remplacée par un autre texte.</li>
+      <li>Aucun visuel de jeu, de carte ou de personnage d'une marque existante n'est associé au logo : la boutique vend ces produits, elle n'en porte pas l'image.</li>
+    </ul>
+  </section>
+
+  <!-- 6. MISES EN SITUATION -->
+  <section class="partie" id="situations" aria-labelledby="t-situations">
+    <h2 id="t-situations"><span class="num">6</span>Mises en situation</h2>
+    <p class="intro">Quatre supports dessinés en SVG pour voir le logo « en vrai ». Aucune photo : ce sont des schémas, les proportions sont réalistes mais indicatives.</p>
+
+    <div class="grille deux">
+
+      <!-- Enseigne -->
+      <div class="situation">
+        <svg viewBox="0 0 560 360" role="img" aria-labelledby="s1-t"><title id="s1-t">Enseigne de la boutique : façade anthracite, bandeau blanc avec le logo horizontal, vitrine, porte</title>
+          <rect width="560" height="360" fill="#F2F3F5"/>
+          <!-- mur -->
+          <rect x="30" y="20" width="500" height="300" fill="#1F2430"/>
+          <!-- bandeau d'enseigne -->
+          <rect x="50" y="40" width="460" height="86" fill="#FFFFFF"/>
+          <g transform="translate(150 50)">
+            <use href="#sym-couleur" width="66" height="66"/>
+            <text x="78" y="46" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="38" letter-spacing="-0.8" fill="#1F2430">Repioche</text>
+            <text x="80" y="62" font-family="Work Sans, Arial, sans-serif" font-weight="500" font-size="8.5" letter-spacing="1.8" fill="#5A6170">CARTES À COLLECTIONNER · ANGERS</text>
+          </g>
+          <!-- vitrine -->
+          <rect x="50" y="146" width="290" height="174" fill="#DCE6EE"/>
+          <rect x="50" y="146" width="290" height="174" fill="none" stroke="#1F2430" stroke-width="6"/>
+          <rect x="70" y="170" width="250" height="30" rx="4" fill="#FFFFFF"/>
+          <text x="195" y="190" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-weight="600" font-size="12" letter-spacing="2" fill="#C73E2D">ACHAT · VENTE · ÉCHANGE</text>
+          <g fill="#FFFFFF"><rect x="90" y="220" width="40" height="56" rx="4"/><rect x="150" y="220" width="40" height="56" rx="4"/><rect x="210" y="220" width="40" height="56" rx="4"/><rect x="270" y="220" width="40" height="56" rx="4"/></g>
+          <!-- porte -->
+          <rect x="370" y="146" width="140" height="174" fill="#DCE6EE" stroke="#1F2430" stroke-width="6"/>
+          <circle cx="440" cy="200" r="28" fill="#C73E2D"/>
+          <use href="#sym-blanc" x="418" y="178" width="44" height="44"/>
+          <text x="440" y="262" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-weight="500" font-size="9" letter-spacing="1.2" fill="#1F2430">OUVERT · 10 h – 19 h</text>
+          <rect x="496" y="222" width="6" height="22" rx="3" fill="#1F2430"/>
+          <!-- trottoir -->
+          <rect x="0" y="320" width="560" height="40" fill="#DDE0E5"/>
+        </svg>
+        <div class="legende"><strong>Enseigne de boutique</strong>Bandeau blanc avec le logo horizontal couleur sur une façade anthracite ; sur la porte, le symbole blanc dans un rond corail. Lettres découpées ou peintes, pas de néon multicolore.</div>
+      </div>
+
+      <!-- Carte de visite -->
+      <div class="situation">
+        <svg viewBox="0 0 560 360" role="img" aria-labelledby="s2-t"><title id="s2-t">Carte de visite recto et verso, format 85 par 55 millimètres</title>
+          <rect width="560" height="360" fill="#F2F3F5"/>
+          <!-- recto -->
+          <g transform="translate(20 70) scale(0.82)">
+            <rect width="310" height="200" rx="8" fill="#FFFFFF" stroke="#DDE0E5"/>
+            <use href="#sym-couleur" x="22" y="22" width="60" height="60"/>
+            <text x="90" y="56" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="30" letter-spacing="-0.6" fill="#1F2430">Repioche</text>
+            <text x="92" y="72" font-family="Work Sans, Arial, sans-serif" font-weight="500" font-size="7.5" letter-spacing="1.6" fill="#5A6170">CARTES À COLLECTIONNER · ANGERS</text>
+            <text x="24" y="128" font-family="Sora, Arial, sans-serif" font-weight="600" font-size="14" fill="#1F2430">Prénom Nom</text>
+            <text x="24" y="146" font-family="Work Sans, Arial, sans-serif" font-size="11" fill="#5A6170">Gérant · achat, vente, estimation</text>
+            <text x="24" y="172" font-family="Work Sans, Arial, sans-serif" font-size="11" fill="#1F2430">06 39 98 00 03 (numéro fictif)</text>
+            <text x="24" y="188" font-family="Work Sans, Arial, sans-serif" font-size="11" fill="#1F2430">bonjour@repioche.example · repioche.example</text>
+          </g>
+          <!-- verso -->
+          <g transform="translate(290 120) scale(0.82)">
+            <rect width="310" height="200" rx="8" fill="#1F2430"/>
+            <use href="#sym-blanc" x="115" y="40" width="80" height="80"/>
+            <text x="155" y="150" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-weight="500" font-size="9" letter-spacing="2" fill="#FFFFFF">ON RACHÈTE VOS CARTES</text>
+            <rect x="110" y="162" width="90" height="4" rx="2" fill="#C73E2D"/>
+          </g>
+          <text x="20" y="252" font-family="Work Sans, Arial, sans-serif" font-size="11" fill="#5A6170">Recto</text>
+          <text x="290" y="302" font-family="Work Sans, Arial, sans-serif" font-size="11" fill="#5A6170">Verso</text>
+        </svg>
+        <div class="legende"><strong>Carte de visite (85 × 55 mm)</strong>Recto blanc avec le logo horizontal et les coordonnées en Work Sans ; verso anthracite avec le symbole blanc et un trait corail. Coordonnées d'exemple, numéro dans la tranche réservée aux fictions.</div>
+      </div>
+
+      <!-- Avatar réseau social -->
+      <div class="situation">
+        <svg viewBox="0 0 560 360" role="img" aria-labelledby="s3-t"><title id="s3-t">Avatar de réseau social : symbole dans un rond, avec le nom du compte et un aperçu de profil</title>
+          <rect width="560" height="360" fill="#F2F3F5"/>
+          <!-- écran téléphone -->
+          <rect x="150" y="10" width="260" height="340" rx="24" fill="#FFFFFF" stroke="#DDE0E5"/>
+          <rect x="150" y="10" width="260" height="90" rx="24" fill="#1F2430"/>
+          <rect x="150" y="60" width="260" height="40" fill="#1F2430"/>
+          <circle cx="280" cy="110" r="46" fill="#FFFFFF"/>
+          <circle cx="280" cy="110" r="40" fill="#C73E2D"/>
+          <use href="#sym-blanc" x="248" y="78" width="64" height="64"/>
+          <text x="280" y="186" text-anchor="middle" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="20" letter-spacing="-0.3" fill="#1F2430">Repioche</text>
+          <text x="280" y="204" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="11" fill="#5A6170">@repioche · Angers</text>
+          <text x="280" y="226" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="11" fill="#1F2430">Cartes à collectionner, neuf et occasion.</text>
+          <text x="280" y="242" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="11" fill="#1F2430">Boutique et vente en ligne.</text>
+          <rect x="180" y="262" width="200" height="34" rx="8" fill="#C73E2D"/>
+          <text x="280" y="284" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-weight="600" font-size="13" fill="#FFFFFF">S'abonner</text>
+          <g fill="#F2F3F5"><rect x="170" y="310" width="68" height="40" rx="4"/><rect x="246" y="310" width="68" height="40" rx="4"/><rect x="322" y="310" width="68" height="40" rx="4"/></g>
+          <!-- rappel des tailles -->
+          <circle cx="70" cy="110" r="20" fill="#C73E2D"/><use href="#sym-blanc" x="54" y="94" width="32" height="32"/>
+          <text x="70" y="146" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="10" fill="#5A6170">40 px</text>
+          <circle cx="490" cy="110" r="32" fill="#1F2430"/><use href="#sym-blanc" x="465" y="85" width="50" height="50"/>
+          <text x="490" y="158" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="10" fill="#5A6170">fond anthracite</text>
+        </svg>
+        <div class="legende"><strong>Avatar de réseau social</strong>Le symbole blanc centré dans un rond corail (ou anthracite), sans le nom : il est déjà écrit sous l'avatar. Le même fichier sert de photo de profil partout.</div>
+      </div>
+
+      <!-- En-tête de site -->
+      <div class="situation">
+        <svg viewBox="0 0 560 360" role="img" aria-labelledby="s4-t"><title id="s4-t">En-tête de site web : barre de navigation avec le logo horizontal, puis une accroche et un bouton corail</title>
+          <rect width="560" height="360" fill="#F2F3F5"/>
+          <rect x="20" y="16" width="520" height="328" rx="10" fill="#FFFFFF" stroke="#DDE0E5"/>
+          <!-- barre de navigation -->
+          <g transform="translate(40 30)">
+            <use href="#sym-couleur" width="40" height="40"/>
+            <text x="46" y="28" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="-0.4" fill="#1F2430">Repioche</text>
+          </g>
+          <g font-family="Work Sans, Arial, sans-serif" font-weight="500" font-size="11" fill="#1F2430">
+            <text x="300" y="56">Boutique</text><text x="360" y="56">Rachat</text><text x="410" y="56">Événements</text>
+          </g>
+          <rect x="476" y="40" width="54" height="30" rx="6" fill="#C73E2D"/>
+          <text x="503" y="59" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-weight="600" font-size="10" fill="#FFFFFF">Panier</text>
+          <line x1="20" y1="84" x2="540" y2="84" stroke="#DDE0E5"/>
+          <!-- accroche -->
+          <text x="40" y="128" font-family="Work Sans, Arial, sans-serif" font-weight="500" font-size="9" letter-spacing="2" fill="#C73E2D">NEUF &amp; OCCASION · ANGERS ET EN LIGNE</text>
+          <text font-family="Sora, Arial, sans-serif" font-weight="700" font-size="30" letter-spacing="-0.6" fill="#1F2430"><tspan x="40" y="166">Vos cartes trouvent</tspan><tspan x="40" y="202">toujours preneur.</tspan></text>
+          <text font-family="Work Sans, Arial, sans-serif" font-size="12" fill="#5A6170"><tspan x="40" y="230">Achat, vente et échange de cartes à collectionner,</tspan><tspan x="40" y="248">estimation gratuite en boutique.</tspan></text>
+          <rect x="40" y="268" width="150" height="38" rx="8" fill="#C73E2D"/>
+          <text x="115" y="292" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-weight="600" font-size="13" fill="#FFFFFF">Faire estimer</text>
+          <rect x="202" y="268" width="130" height="38" rx="8" fill="none" stroke="#1F2430" stroke-width="1.5"/>
+          <text x="267" y="292" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-weight="600" font-size="13" fill="#1F2430">Voir la boutique</text>
+          <!-- visuel : pile de cartes -->
+          <g transform="translate(360 110)">
+            <rect x="40" y="10" width="110" height="150" rx="10" fill="#F2F3F5" transform="rotate(-10 95 85)"/>
+            <rect x="60" y="30" width="110" height="150" rx="10" fill="#DDE0E5" transform="rotate(-4 115 105)"/>
+            <rect x="80" y="50" width="110" height="150" rx="10" fill="#1F2430"/>
+            <use href="#sym-blanc" x="105" y="95" width="60" height="60"/>
+          </g>
+        </svg>
+        <div class="legende"><strong>En-tête de site</strong>Barre blanche avec le symbole et le nom (version horizontale réduite, sans la ligne de description), un seul bouton corail ; l'accroche en Sora, le texte en Work Sans. Le visuel est un dessin : pas de photo de cartes d'une marque existante.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="pied">
+    <p class="mention">Boutique fictive créée pour un portfolio.</p>
+    <p>Polices : <a href="https://fonts.google.com/specimen/Sora">Sora</a> et <a href="https://fonts.google.com/specimen/Work+Sans">Work Sans</a>, servies par Google Fonts, licence SIL Open Font License 1.1 (usage libre, y compris commercial). À l'ouverture de cette page, le navigateur envoie une requête à Google pour charger ces polices (adresse IP transmise) ; aucune autre donnée n'est collectée.</p>
+    <p>Logo, schémas et mises en situation dessinés en SVG pour ce projet, sans image ni icône de tiers et sans IA générative d'images. Aucun nom, symbole ou visuel d'une marque de cartes existante.</p>
+    <p>Réalisé pour un portfolio freelance.</p>
+  </footer>
+
+</div>
+</body>
+</html>
